@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Менің блогым</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --ink: #1a1208;
+      --accent: #c0392b;
+      --muted: #7a6e5f;
+      --white: #fffdf8;
+      --border: #d4c9b5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      border-bottom: 3px solid var(--ink);
+      padding: 0 40px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .header-date { letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .login-form {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .login-form input {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      padding: 6px 12px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      color: var(--ink);
+      border-radius: 2px;
+      outline: none;
+      width: 110px;
+      transition: border-color 0.2s;
+    }
+
+    .login-form input:focus { border-color: var(--accent); }
+
+    .login-form button {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 6px 16px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+    }
+
+    .login-form button:hover { opacity: 0.85; }
+
+    .site-title {
+      text-align: center;
+      padding: 28px 0 20px;
+    }
+
+    .site-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 62px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .site-title h1 span { color: var(--accent); }
+
+    .site-title p {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--ink);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      gap: 0;
+    }
+
+    nav ul li a {
+      display: block;
+      color: var(--bg);
+      text-decoration: none;
+      padding: 14px 32px;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav ul li a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    nav ul li a.active {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    /* ── BREAKING TICKER ── */
+    .ticker {
+      background: var(--accent);
+      color: var(--white);
+      padding: 8px 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-label {
+      background: var(--ink);
+      color: var(--white);
+      padding: 0 16px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+    }
+
+    .ticker-track {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .ticker-text {
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 600;
+      animation: ticker 28s linear infinite;
+      display: inline-block;
+      padding-left: 100%;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      padding: 40px 0;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+    }
+
+    .category-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+
+    .featured h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .featured h2 a { text-decoration: none; color: var(--ink); }
+    .featured h2 a:hover { color: var(--accent); }
+
+    .featured p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 660px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .article-meta .author { color: var(--accent); font-weight: 600; }
+    .article-meta span::before { content: '·'; margin-right: 16px; }
+    .article-meta span:first-child::before { content: ''; margin: 0; }
+
+    /* ── NEWS GRID ── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .news-card {
+      border-top: 2px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .news-card:hover .card-title { color: var(--accent); }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #d4c9b5 0%, #b5a990 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+
+    .card-category {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .card-title a { text-decoration: none; color: inherit; }
+
+    .card-excerpt {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .card-date {
+      font-size: 12px;
+      color: var(--border);
+      margin-top: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { }
+
+    .sidebar-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .sidebar-header {
+      background: var(--ink);
+      color: var(--white);
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-body { padding: 16px; }
+
+    .sidebar-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .sidebar-item:last-child { border-bottom: none; }
+
+    .sidebar-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      min-width: 32px;
+    }
+
+    .sidebar-text { font-size: 14px; line-height: 1.4; font-weight: 600; }
+    .sidebar-text:hover { color: var(--accent); }
+
+    .sidebar-date { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Tags */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+
+    .tag:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 36px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-brand span { color: var(--accent); }
+
+    footer p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .featured   { animation: fadeUp 0.6s ease both; }
+    .news-card  { animation: fadeUp 0.6s ease both; }
+    .news-card:nth-child(1) { animation-delay: 0.1s; }
+    .news-card:nth-child(2) { animation-delay: 0.2s; }
+    .news-card:nth-child(3) { animation-delay: 0.3s; }
+    .news-card:nth-child(4) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <span class="header-date">Сейсенбі, 4 Сәуір 2026 жыл</span>
+      <form class="login-form" name="login_form" method="get">
+        <input type="text" placeholder="Логин">
+        <input type="password" placeholder="Пароль">
+        <button type="submit">Кіру</button>
+      </form>
+    </div>
+    <div class="site-title">
+      <h1>Менің<span>Блогым</span></h1>
+      <p>Білім · Технология · Өмір</p>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li><a href="#" class="active">Басты бет</a></li>
+      <li><a href="#">Мен туралы</a></li>
+      <li><a href="#">Жаңалықтар</a></li>
+      <li><a href="#">Технологиялар</a></li>
+      <li><a href="#">Байланыс</a></li>
+    </ul>
+  </nav>
+
+  <!-- BREAKING NEWS TICKER -->
+  <div class="ticker">
+    <div class="ticker-label">🔴 Соңғы жаңалық</div>
+    <div class="ticker-track">
+      <span class="ticker-text">
+        Жаңа оқу жылы басталды &nbsp;·&nbsp; 
+        Қазақстанда интернет-қолданушылар саны артты &nbsp;·&nbsp; 
+        Жасанды интеллект саласында жаңа мүмкіндіктер пайда болды &nbsp;·&nbsp; 
+        Веб-технологиялар бойынша халықаралық конференция өтеді &nbsp;·&nbsp;
+        Студенттер IT олимпиадасында жүлде алды &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="container">
+    <div class="main-grid">
+
+      <!-- CONTENT -->
+      <main>
+
+        <!-- Featured Article -->
+        <article class="featured">
+          <span class="category-tag">Басты тақырып</span>
+          <h2><a href="#">Веб-сайт жасау — болашақтың маманы үшін маңызды дағды</a></h2>
+          <p>
+            Бүгінгі заманда интернеттің дамуымен бірге веб-сайт жасаушыларға деген сұраныс күн санап артып келеді.
+            HTML, CSS және JavaScript тілдерін үйрену — IT саласына бірінші қадам болып табылады. 
+            Жеке сайт жасай білген маман кез келген жерде жұмыс таба алады.
+          </p>
+          <div class="article-meta">
+            <span class="author">Қасымбек Жұмағазиве</span>
+            <span>4 Сәуір 2026</span>
+            <span>5 минутта оқылады</span>
+          </div>
+        </article>
+
+        <!-- News Grid -->
+        <div class="news-grid">
+
+          <article class="news-card">
+            <div class="card-img">💻</div>
+            <div class="card-category">Технология</div>
+            <h3 class="card-title"><a href="https://www.w3schools.com/html/default.asp">HTML5 — заманауи веб-беттің негізі</a></h3>
+            <p class="card-excerpt">HTML5 тілі мультимедиа элементтерін қосуға және мобильді құрылғыларға бейімделуге мүмкіндік береді.</p>
+            <div class="card-date">2 Сәуір 2026</div>
+          </article>
+
+          <article class="news-card">
+            <div class="card-img">🎨</div>
+            <div class="card-category">Дизайн</div>
+            <h3 class="card-title"><a href="https://www.w3schools.com/css/default.asp">CSS арқылы сайтты безендіру тәсілдері</a></h3>
+            <p class="card-excerpt">Түс, қаріп және орналасу — CSS тілі арқылы сайттың сыртқы келбетін толықтай басқаруға болады.</p>
+            <div class="card-date">1 Сәуір 2026</div>
+          </article>
+
+          <article class="news-card">
+            <div class="card-img">⚡</div>
+            <div class="card-category">JavaScript</div>
+            <h3 class="card-title"><a href="https://www.w3schools.com/js/default.asp">JavaScript — сайтқа жан беретін тіл</a></h3>
+            <p class="card-excerpt">Интерактивтілік, анимация және деректермен жұмыс — мұның бәрін JavaScript тілі арқылы жүзеге асыруға болады.</p>
+            <div class="card-date">30 Наурыз 2026</div>
+          </article>
+
+          <article class="news-card">
+            <div class="card-img">🌐</div>
+            <div class="card-category">Білім</div>
+            <h3 class="card-title"><a href="https://www.codecademy.com/">Онлайн оқу платформалары: қайдан бастаймыз?</a></h3>
+            <p class="card-excerpt">Codecademy, freeCodeCamp, MDN — бұл платформалар бағдарламалауды үйренуге арналған тамаша ресурстар.</p>
+            <div class="card-date">28 Наурыз 2026</div>
+          </article>
+
+        </div>
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <div class="sidebar-section">
+          <div class="sidebar-header">Танымал жазбалар</div>
+          <div class="sidebar-body">
+            <div class="sidebar-item">
+              <div class="sidebar-num">01</div>
+              <div>
+                <div class="sidebar-text">Жеке веб-сайт жасаудың 7 себебі</div>
+                <div class="sidebar-date">1 Сәуір 2026</div>
+              </div>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">02</div>
+              <div>
+                <div class="sidebar-text">Фриланс және веб-дизайн: қайдан бастау керек?</div>
+                <div class="sidebar-date">28 Наурыз 2026</div>
+              </div>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">03</div>
+              <div>
+                <div class="sidebar-text">PHP тілін үйренудің жолдары</div>
+                <div class="sidebar-date">25 Наурыз 2026</div>
+              </div>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">04</div>
+              <div>
+                <div class="sidebar-text">Responsive дизайн дегеніміз не?</div>
+                <div class="sidebar-date">20 Наурыз 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-header">Тегтер</div>
+          <div class="sidebar-body">
+            <div class="tag-cloud">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">PHP</span>
+              <span class="tag">Дизайн</span>
+              <span class="tag">Веб</span>
+              <span class="tag">IT</span>
+              <span class="tag">Білім</span>
+              <span class="tag">Фриланс</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-header">Хабарландыруға жазылу</div>
+          <div class="sidebar-body">
+            <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Жаңа жазбалардан бірінші хабар ал!</p>
+            <input type="email" placeholder="Электрондық пошта" style="width:100%;border:1px solid var(--border);background:var(--bg);padding:8px 12px;font-family:'Source Sans 3',sans-serif;font-size:13px;margin-bottom:8px;outline:none;">
+            <button style="width:100%;background:var(--accent);color:var(--white);border:none;padding:10px;font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;">Жазылу</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Менің<span>Блогым</span></div>
+        <p>&copy; Нөкіс мемлекеттік педагогикалық институты</p>
+      </div>
+      <div style="font-size:14px;color:var(--muted);">
+        Пікір және ұсыныстарыңыз болса:<br>
+        <a href="mailto:adil110496@mail.ru">jumagazievqasimbek@gmail.com</a> мекенжайына жіберіңіз!
+      </div>
+      <div class="footer-copy">
+        <p>Барлық құқықтар қорғалған</p>
+        <p>4 Сәуір 2026</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
